@@ -1,0 +1,40 @@
+
+-- Create the GUI
+local gui = Instance.new("ScreenGui")
+gui.Name = "NotificationGUI"
+gui.Parent = player.PlayerGui
+
+-- Create the badge-like GUI
+local badge = Instance.new("ImageButton")
+badge.Name = "Badge"
+badge.Size = UDim2.new(0, 100, 0, 100)
+badge.Position = UDim2.new(0.5, -50, 0.5, -50)
+badge.Image = "rbxassetid://1234567890" -- Replace with the badge image ID
+badge.BackgroundTransparency = 1
+badge.Parent = gui
+
+-- Create the notification label
+local label = Instance.new("TextLabel")
+label.Name = "NotificationLabel"
+label.Size = UDim2.new(0, 100, 0, 20)
+label.Position = UDim2.new(0, 0, 1, -20)
+label.BackgroundTransparency = 1
+label.Font = Enum.Font.SourceSansBold
+label.Text = "Preparing your script"
+label.TextColor3 = Color3.new(1, 1, 1)
+label.Parent = badge
+
+-- Slow down falling speed
+local humanoid = character:WaitForChild("Humanoid")
+
+humanoid.FreeFalling:Connect(function(isFreeFalling)
+    if isFreeFalling then
+        humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall, false)
+        humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping, false)
+        humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown, false)
+        humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, false)
+        humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding, false)
+        
+        humanoid.JumpPower = 50  -- Adjust the jump power to control the falling speed
+    end
+end
