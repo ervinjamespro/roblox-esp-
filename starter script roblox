@@ -1,0 +1,28 @@
+-- Create the GUI
+local gui = Instance.new("ScreenGui")
+gui.Name = "AutoClickerGUI"
+gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create the frame
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 60, 0, 60)
+frame.Position = UDim2.new(0.5, -30, 0.5, -30)
+frame.BackgroundColor3 = Color3.new(0, 0, 0)
+frame.Parent = gui
+
+-- Create the button
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(1, 0, 1, 0)
+button.Text = "Click"
+button.BackgroundColor3 = Color3.new(0, 0, 1)
+button.Parent = frame
+
+-- Auto-click function
+local function autoClick()
+    while wait(1) do
+        button:Click()
+    end
+end
+
+-- Start auto-clicking when the button is clicked
+button.MouseButton1Click:Connect(autoClick)
